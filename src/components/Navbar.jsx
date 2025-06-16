@@ -1,14 +1,15 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
 
     const navLinks = <>
-        <li><a>Home</a></li>
-        <li><a>About</a></li>
-        <li><a>Blogs</a></li>
+        <li><Link href={"/"}>Home</Link></li>
+        <li><Link href={"/about"}>About</Link></li>
+        <li><Link href={"/blogs"}>Blogs</Link></li>
     </>
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100/55 shadow-sm sticky top-0 z-10 backdrop-blur-sm px-4 md:px-20">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -20,7 +21,7 @@ const Navbar = () => {
                             {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Medicare Pro</a>
+                <Link href={"/"} className="btn btn-ghost text-xl">Medicare Pro</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

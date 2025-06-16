@@ -1,13 +1,16 @@
 import Banner from "@/components/Banner";
+import Faq from "@/components/Faq";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div>
-      {/* <h1>Hello Medicare-Pro</h1>
-      <Link href={"/register"}><h5>register</h5></Link>
-      <Link href={"/login"}><h5>Login</h5></Link> */}
+      <Navbar></Navbar>
       <Banner></Banner>
+      <Faq></Faq>
+      <Footer></Footer>
     </div>
   );
 }
