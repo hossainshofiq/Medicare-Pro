@@ -39,7 +39,7 @@ const Banner = () => {
                     <p className='text-gray-600'>Manage your practice and assistants</p>
                     <div className='pt-2'>
                         <Link 
-                            href="/auth/doctor/login" 
+                            href="/api/v1/auth/login" 
                             className='w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white px-8 py-2 rounded-md transition duration-200 font-medium'
                         >
                             Doctor Login

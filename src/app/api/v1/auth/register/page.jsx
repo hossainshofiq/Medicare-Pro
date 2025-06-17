@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa6';
 
 const AdminRegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -74,7 +75,11 @@ const AdminRegisterPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+            <div className='flex justify-center items-center text-blue-600 hover:text-blue-500 gap-2 btn mb-5'>
+                <FaArrowLeft></FaArrowLeft>
+                <span>Back to Home</span>
+            </div>
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <h1 className="text-center text-3xl font-extrabold mb-2 text-gray-800">
                     Admin Registration

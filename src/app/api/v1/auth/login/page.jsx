@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa6';
 
 const AdminLoginPage = () => {
     const [email, setEmail] = useState('');
@@ -17,31 +18,89 @@ const AdminLoginPage = () => {
         setError('');
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Validate inputs
+            if (!email || !password) {
+                throw new Error('Email and password are required');
+            }
 
-            // In a real app, you would call your API here:
-            // const response = await fetch('/api/v1/auth/login', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify({ email, password })
-            // });
+            // API call
+            const response = await fetch('https://medicare-pro-backend.vercel.app/api/v1/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-            // For demo purposes, we'll simulate a successful login
-            console.log('Login attempt with:', { email, password });
+            // Handle response
+            const data = await response.json();
 
-            // Redirect to admin dashboard
-            router.push('/admin/dashboard');
+            if (!response.ok) {
+                // Handle API errors
+                throw new Error(data.message || 'Login failed');
+            }
+
+            // Successful login
+            console.log('Login successful:', data);
+
+            // Store token and user data (adjust based on your API response)
+            localStorage.setItem('authToken', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            // Redirect based on user role
+            if (data.user.role === 'super_admin') {
+                router.push('/admin/dashboard');
+            } else if (data.user.role === 'doctor') {
+                router.push('/doctor/dashboard');
+            } else {
+                router.push('/dashboard');
+            }
+
         } catch (err) {
-            setError('Invalid email or password');
+            console.error('Login error:', err);
+            setError(err.message || 'An error occurred during login');
         } finally {
             setIsLoading(false);
         }
     };
 
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     setIsLoading(true);
+    //     setError('');
+
+    //     try {
+    //         // Simulate API call
+    //         await new Promise(resolve => setTimeout(resolve, 1000));
+
+    //         // In a real app, you would call your API here:
+    //         const response = await fetch('/api/v1/auth/login', {
+    //           method: 'POST',
+    //           headers: { 'Content-Type': 'application/json' },
+    //           body: JSON.stringify({ email, password })
+    //         });
+
+    //         // For demo purposes, we'll simulate a successful login
+    //         console.log('Login attempt with:', { email, password });
+
+    //         // Redirect to admin dashboard
+    //         router.push('/admin/dashboard');
+    //     } catch (err) {
+    //         setError('Invalid email or password');
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
     return (
         <>
-            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+                <Link href={"/"}>
+                    <div className='flex justify-center items-center text-blue-600 hover:text-blue-500 gap-2 btn mb-5'>
+                        <FaArrowLeft></FaArrowLeft>
+                        <span>Back to Home</span>
+                    </div>
+                </Link>
                 <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                     <h1 className="text-center text-3xl font-extrabold mb-2 text-gray-800">
                         Admin Login
