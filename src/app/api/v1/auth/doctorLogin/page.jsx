@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 
-const AdminLoginPage = () => {
+const DoctorLoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -104,15 +104,9 @@ const AdminLoginPage = () => {
                     </div>
                 </Link>
                 <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                    <h1 className="text-center text-3xl font-extrabold mb-2 text-gray-800">
-                        Admin Login
+                    <h1 className="text-center text-3xl font-extrabold mb-6 text-gray-800">
+                        Doctor Login
                     </h1>
-                    <p className="mb-6 text-center text-sm text-gray-600">
-                        Or{' '}
-                        <Link href="/api/v1/auth/register" className="font-medium text-blue-600 hover:text-blue-500">
-                            create a new account
-                        </Link>
-                    </p>
 
                     {error && (
                         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-center">
@@ -159,13 +153,6 @@ const AdminLoginPage = () => {
                         </button>
                     </form>
 
-                    <div className="mt-4 text-center text-sm text-gray-600">
-                        Don't have an account?{' '}
-                        <Link href="/api/v1/auth/register" className="text-blue-600 hover:underline">
-                            Register
-                        </Link>
-                    </div>
-
                     <div className="mt-6 text-center text-sm text-gray-600">
                         Need help? Contact{' '}
                         <a href="mailto:hr@mydrtech.in" className="text-blue-600 hover:underline">
@@ -178,4 +165,4 @@ const AdminLoginPage = () => {
     );
 };
 
-export default AdminLoginPage;
+export default DoctorLoginPage;

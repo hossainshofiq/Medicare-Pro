@@ -169,6 +169,13 @@ const AdminRegisterPage = () => {
                     >
                         {isSubmitting ? 'Registering...' : 'Register'}
                     </button>
+
+                    <div className="mt-4 text-center text-sm text-gray-600">
+                        Need help? Contact{' '}
+                        <a href="mailto:hr@mydrtech.in" className="text-blue-600 hover:underline">
+                            hr@mydrtech.in
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>
